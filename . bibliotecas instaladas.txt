@@ -1,0 +1,40 @@
+expo install @react-navigation/native
+expo install @react-navigation/stack
+expo install @react-navigation/drawer
+expo install firebase
+expo install react-native-safe-area-context
+expo install react-native-gesture-handler
+expo install react-native-reanimated
+
+////////////////////////////////////////////////////////////////////////
+no arquivo babel.config.js, deixar desse jeito:
+
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ['react-native-reanimated/plugin']
+  };
+};
+////////////////////////////////////////////////////////////////////////
+
+criei um arquivo chamado metro.config.js na pasta principal (no mesmo lugar onde tem App.js)
+colei esse código dentro do arquivo:
+
+module.exports = {
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+        },
+      }),
+    },
+    //added this
+    resolver: {
+      sourceExts: ['jsx', 'js', 'ts', 'tsx', 'cjs'],
+    },
+  };
+////////////////////////////////////////////////////////////////////////
+
+OBS: ao editar esses arquivos, vai ser necessário fechar e abrir o vscode de novo
